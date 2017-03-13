@@ -41,6 +41,13 @@ $(function () {
 		    return;
 	    }
 	    console.log(message.data);
+	    var json = JSON.parse(message.data);
+	    if(json.id == 0) {
+		    temp0.innerHTML = "Sensor 0: " + json.temperature + "\xB0"+"C";
+	    }
+	    if(json.id == 1) {
+		    temp1.innerHTML = "Sensor 1: " + json.temperature + "\xB0"+"C";
+	    }
     };
 });
 
