@@ -5,4 +5,17 @@
 	font-family: Arial;
 	font-size: 50px;
 }
+table.middle {
+	position:absolute;
+	top:20%;
+	height:10em;
+	margin-top:-5em;
+	margin-left:5%; 
+	margin-right:5%;
+	background: #cccccc;
+	color: black;
+	border-width: 2px;
+	border-style: outset;
+}
+
 

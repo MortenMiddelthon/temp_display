@@ -73,7 +73,7 @@ wsServer.on('request', function(request) {
     });
 });
 
-setInterval(send_temp,2000);
+setInterval(send_temp,10000);
 
 function send_temp() {
 	devices = fs.readdirSync(device_dir);

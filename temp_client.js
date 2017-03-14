@@ -42,11 +42,16 @@ $(function () {
 	    }
 	    console.log(message.data);
 	    var json = JSON.parse(message.data);
+	    var d = new Date();
 	    if(json.id == 0) {
 		    temp0.innerHTML = "Sensor 0: " + json.temperature + "\xB0"+"C";
+		    var img = json.device + "-daily.png?ts=" + d.getTime();
+		    document.getElementById("img_temp0").src=img;
 	    }
 	    if(json.id == 1) {
 		    temp1.innerHTML = "Sensor 1: " + json.temperature + "\xB0"+"C";
+		    var img = json.device + "-daily.png?ts=" + d.getTime();
+		    document.getElementById("img_temp1").src=img;
 	    }
     };
 });
