@@ -86,7 +86,7 @@ function send_temp() {
 			var temp_match = /t=(\d+)/m;
 			var temp = content.match(temp_match);
 			console.log(devices[dev] + ": " + temp[1]/1000 + "\xB0"+"C");
-			var json = JSON.stringify({ type:'message', id: dev, temperature: temp[1]/1000 });
+			var json = JSON.stringify({ type:'message', device: devices[dev], id: dev, temperature: temp[1]/1000 });
 			if(isJSON(json)) {
 				for (var i=0; i < clients.length; i++) {
 					clients[i].sendUTF(json);
