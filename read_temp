@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use RRD::Simple ();
 
 my $id = `/usr/bin/id -u`;
 chomp $id;
@@ -22,11 +23,18 @@ while(1) {
 	my @devices = grep(/^28-/, readdir(DEVDIR));
 	foreach my $device (@devices) {
 		if(-f "$device_dir/$device/w1_slave") {
+			my $now = time();
 			my $temp = `cat $device_dir/$device/w1_slave|grep " t=" |awk '{print \$10}'`;
 			chomp $temp;
 			$temp =~ s/t=//;
 			$temp = sprintf("%.2f", $temp/1000);
 			print "$device Temp = $temp C\n";
+			my $rrd = RRD::Simple->new( file => "$device.rrd" );
+			if(!-f "$device.rrd") {
+				$rrd->create(temperature => "GAUGE");
+			}
+			$rrd->update("$device.rrd", $now, temperature => $temp);
+			
 		}
 	}
 	closedir DEVDIR;
