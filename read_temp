@@ -34,6 +34,12 @@ while(1) {
 				$rrd->create(temperature => "GAUGE");
 			}
 			$rrd->update("$device.rrd", $now, temperature => $temp);
+			my %rtn = $rrd->graph(
+				destination => "./",
+				title => "Temperature - degrees Celsius",
+				vertical_label => "C",
+				interlaced => "" );
+			printf("Created %s\n",join(", ",map { $rtn{$_}->[0] } keys %rtn));
 			
 		}
 	}
