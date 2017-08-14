@@ -1,3 +1,5 @@
+var ip = location.host;
+
 $(function () {
     "use strict";
 
@@ -19,7 +21,8 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket('ws://pi01.hjemme.flipp.net:31338');
+    var host = 'ws://' + ip + ':31338';
+    var connection = new WebSocket(host);
 
     connection.onopen = function () {
         // first we want users to enter their names
