@@ -1,3 +1,5 @@
+var ip = location.host;
+
 $(function () {
     "use strict";
 
@@ -19,7 +21,8 @@ $(function () {
     }
 
     // open connection
-    var connection = new WebSocket('ws://pi01.hjemme.flipp.net:31338');
+    var host = 'ws://' + ip + ':31338';
+    var connection = new WebSocket(host);
 
     connection.onopen = function () {
         // first we want users to enter their names
@@ -47,6 +50,8 @@ $(function () {
 		    temp0.innerHTML = "Sensor 0: " + json.temperature + "\xB0"+"C";
 		    var img = json.device + "-daily.png?ts=" + d.getTime();
 		    document.getElementById("img_temp0").src=img;
+		    var img_weekly = json.device + "-weekly.png?ts=" + d.getTime();
+		    document.getElementById("img_temp1").src=img_weekly;
 	    }
 	    if(json.id == 1) {
 		    temp1.innerHTML = "Sensor 1: " + json.temperature + "\xB0"+"C";
